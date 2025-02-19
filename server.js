@@ -26,16 +26,13 @@ app.post("/create/students", async (req, res) => {
     try {
       const { name, age, gender } = req.body;
   
-      // Validate required fields
       if (!name || !age || !gender) {
         return res.status(400).json({ message: "Student details are required" });
       }
   
-      // Create new student document
       const newStudent = new Student({ name, age, gender });
       await newStudent.save();
   
-      // Return response
       res.status(201).json({ message: "Student created successfully", student: newStudent });
     } catch (error) {
       console.error("Error creating student:", error);
